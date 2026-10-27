@@ -1,0 +1,29 @@
+from os import system
+from datetime import datetime, timedelta
+
+def formata_montante(montante):
+    return f'R$ {montante:.2f}'
+
+system ('cls')
+investimento= (input('Escolha o tipo de investimento (CDB ou LCI): '))
+try:
+    capital= float(input('Digite o valor do capital: '))
+    taxa= float(input('Digite a taxa de juros mensal (em %): '))
+    prazo= int(input('Digite o número de meses: '))
+    montante= capital* (1+ taxa/100)**prazo
+    hoje= datetime.now()
+    vencimento= hoje + timedelta(days=30*prazo)
+    input('Digite enter para continuar...')
+except ValueError:
+    print('Valor incorreto. Por favor, tente novamente.')
+    input('Digite enter para sair...')
+else:
+    print(f'\nTipo de investimento: {investimento} ')
+    print(f'Capital inicial:R$ {formata_montante(capital)} ')
+    print(f'Taxa de juros:{taxa}% ao mês')
+    print(f'Prazo: {prazo} meses')
+    print(f'Montante: R$ {formata_montante(montante)}')
+    print(f'\nData da aplicação: {hoje.strftime("%d/%m/%Y")}')
+    print(f'Data de vencimento: {vencimento.strftime("%d/%m/%Y")}')
+
+input('Digite enter para sair...')
